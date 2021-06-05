@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: external
+  template:
+    metadata:
+      labels:
+        app: external
+    spec:
+      containers:
+      - name: external-container
+        env:
+        - name: SERVER
+          value: "http://internal-svc:8082"
+        image: jsarvabhowma/externalapp:v2
+        ports:
+        - containerPort: 8080

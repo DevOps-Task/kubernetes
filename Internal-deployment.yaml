@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: internal-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: internal
+  template:
+    metadata:
+      labels:
+        app: internal
+    spec:
+      containers:
+      - name: internal-container
+        image: jsarvabhowma/internalapp:v1
+        ports:
+        - containerPort: 8082
